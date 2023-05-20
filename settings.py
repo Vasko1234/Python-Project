@@ -13,4 +13,4 @@ level_map = [
 
 tile_size = 64
 WIDTH = 1200
-HEIGHT = len(game_map) * tile_size
+HEIGHT = len(level_map) * tile_size
