@@ -12,6 +12,8 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.08
         self.jump_speed = -4
 
+    
+
     def get_input(self):
         keys = pygame.key.get_pressed()
 
