@@ -1,4 +1,5 @@
 import pygame
+from support import import_folder
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position):
@@ -12,7 +13,13 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.08
         self.jump_speed = -4
 
-    
+    def import_character_assets(self):
+        character_path = "../graphics/character/"
+        self.animations = {"idle": [], "run": [], "jump": [], "fall": []}
+
+        for animation in self.animations.keys():
+            full_path = character_path + animation
+            self.animations[animation] = import_folder(full_path)
 
     def get_input(self):
         keys = pygame.key.get_pressed()
