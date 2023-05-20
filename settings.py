@@ -1,4 +1,4 @@
-game_map = [
+level_map = [
 "                            ",
 "                            ",
 "                            ",
