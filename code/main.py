@@ -23,3 +23,5 @@ while True:
 
     pygame.display.update()
     clock.tick(FPS)
+
+    #This was the first step of creating the game
