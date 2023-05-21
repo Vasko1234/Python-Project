@@ -23,7 +23,7 @@ class Level:
                     tile = Tile((x, y), tile_size)
                     self.tiles.add(tile)
                 if cell == "P":
-                    player = Player((x, y))
+                    player = Player((x, y), self.display_surface)
                     self.player.add(player)
 
     def scroll_x(self):
