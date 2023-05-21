@@ -5,7 +5,7 @@ class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, position, type):
         super().__init__()
         self.frame_index = 0
-        self.animation_speed = 0.05
+        self.animation_speed = 0.15
         if type == "jump":
             self.frames = import_folder("Python-Project/graphics/character/dust_particles/jump")
         if type == "land":
