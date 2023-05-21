@@ -6,13 +6,13 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.import_character_assets()
         self.frame_index = 0
-        self.animation_speed = 0.03
+        self.animation_speed = 0.05
         self.image = self.animations["idle"][self.frame_index]
         self.rect = self.image.get_rect(topleft = position)
 
         self.import_dust_run_particles()
         self.dust_frame_index = 0
-        self.dust_animation_speed = 0.03
+        self.dust_animation_speed = 0.05
         self.display_surface = surface
         
         self.direction = pygame.math.Vector2(0, 0)

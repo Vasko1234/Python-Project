@@ -16,6 +16,8 @@ while True:
             pygame.quit()
             sys.exit()
 
+    pygame.display.set_caption(f"FPS: {int(clock.get_fps())}")
+
     screen.fill((0, 0, 0))
     level.run()
 
