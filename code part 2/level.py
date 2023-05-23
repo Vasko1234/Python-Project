@@ -2,11 +2,12 @@ import pygame
 from support import import_csv_layout, import_cut_graphics
 from settings import tile_size
 from tiles import Tile, StaticTile, Crate, AnimatedTile, Coin, Palm
+from enemy import Enemy
 
 class Level:
     def __init__(self, level_data, surface):
         self.display_surface = surface
-        self.world_shift = 0
+        self.world_shift = -1
 
         terrain_layout = import_csv_layout(level_data["terrain"])
         self.terrain_sprites = self.create_tile_group(terrain_layout, "terrain")
@@ -25,6 +26,12 @@ class Level:
 
         bg_palms_layout = import_csv_layout(level_data["bg_palms"])
         self.bg_palms_sprites = self.create_tile_group(bg_palms_layout, "bg_palms")
+
+        enemies_layout = import_csv_layout(level_data["enemies"])
+        self.enemies_sprites = self.create_tile_group(enemies_layout, "enemies")
+
+        constraints_layout = import_csv_layout(level_data["constraints"])
+        self.constraints_sprites = self.create_tile_group(constraints_layout, "constraints")
 
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -63,9 +70,20 @@ class Level:
                     if type == "bg_palms":
                         sprite = Palm(tile_size, x, y, "Python-Project/graphics/terrain/palm_bg", 64)
 
+                    if type == "enemies":
+                        sprite = Enemy(tile_size, x, y)
+
+                    if type == "constraints":
+                        sprite = Tile(tile_size, x, y)
+
                     sprite_group.add(sprite)
 
         return sprite_group
+
+    def enemy_collision_reverse(self):
+        for enemy in self.enemies_sprites.sprites():
+            if pygame.sprite.spritecollide(enemy, self.constraints_sprites, False):
+                enemy.reverse()
 
     def run(self):
         self.bg_palms_sprites.update(self.world_shift)
@@ -73,6 +91,11 @@ class Level:
 
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
+
+        self.enemies_sprites.update(self.world_shift)
+        self.constraints_sprites.update(self.world_shift)
+        self.enemy_collision_reverse()
+        self.enemies_sprites.draw(self.display_surface)
 
         self.crates_sprites.update(self.world_shift)
         self.crates_sprites.draw(self.display_surface)
