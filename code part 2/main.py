@@ -1,7 +1,9 @@
 import pygame
 import sys
+from settings import *
 
-SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
+pygame.init()
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 FPS = 240
