@@ -1,7 +1,7 @@
 import pygame
 from support import import_csv_layout, import_cut_graphics
 from settings import tile_size
-from tiles import Tile, StaticTile
+from tiles import Tile, StaticTile, Crate
 
 class Level:
     def __init__(self, level_data, surface):
@@ -13,6 +13,9 @@ class Level:
 
         grass_layout = import_csv_layout(level_data["grass"])
         self.grass_sprites = self.create_tile_group(grass_layout, "grass")
+
+        crates_layout = import_csv_layout(level_data["crates"])
+        self.crates_sprites = self.create_tile_group(crates_layout, "crates")
 
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
@@ -33,6 +36,9 @@ class Level:
                         tile_surface = grass_tile_list[int(value)]
                         sprite = StaticTile(tile_size, x, y, tile_surface)
 
+                    if type == "crates":
+                        sprite = Crate(tile_size, x, y)
+
                     sprite_group.add(sprite)
 
         return sprite_group
@@ -43,3 +49,6 @@ class Level:
 
         self.grass_sprites.update(self.world_shift)
         self.grass_sprites.draw(self.display_surface)
+
+        self.crates_sprites.update(self.world_shift)
+        self.crates_sprites.draw(self.display_surface)
