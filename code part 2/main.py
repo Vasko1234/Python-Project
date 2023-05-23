@@ -1,12 +1,14 @@
 import pygame
 import sys
 from settings import *
+from level import Level
 
 pygame.init()
 
+FPS = 240
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
-FPS = 240
+level = Level("level_data", screen)
 
 while True:
     for event in pygame.event.get():
@@ -16,6 +18,7 @@ while True:
 
     pygame.display.set_caption(f"FPS: {int(clock.get_fps())}")
     screen.fill((0, 0, 0))
+    level.run()
 
     pygame.display.update()
     clock.tick(FPS)
