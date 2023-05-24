@@ -3,12 +3,13 @@ import pygame
 from tiles import AnimatedTile, StaticTile
 from support import import_folder
 from random import choice, randint
+from settings import graphics
 
 class Sky:
     def __init__(self, horizon):
-        self.top = pygame.image.load("Python-Project/graphics/decoration/sky/sky_top.png").convert()
-        self.middle = pygame.image.load("Python-Project/graphics/decoration/sky/sky_middle.png").convert()
-        self.bottom = pygame.image.load("Python-Project/graphics/decoration/sky/sky_bottom.png").convert()
+        self.top = pygame.image.load(f"Python-Project/{graphics}/decoration/sky/sky_top.png").convert()
+        self.middle = pygame.image.load(f"Python-Project/{graphics}/decoration/sky/sky_middle.png").convert()
+        self.bottom = pygame.image.load(f"Python-Project/{graphics}/decoration/sky/sky_bottom.png").convert()
         self.horizon = horizon
 
         self.top = pygame.transform.scale(self.top, (SCREEN_WIDTH, tile_size))
@@ -35,7 +36,7 @@ class Water:
         for tile in range(tile_x_amount):
             x = tile * water_tile_width + water_start
             y = top
-            sprite = AnimatedTile(192, x, y, "Python-Project/graphics/decoration/water")
+            sprite = AnimatedTile(192, x, y, f"Python-Project/{graphics}/decoration/water")
             self.water_sprites.add(sprite)
 
     def draw(self, surface, shift):
@@ -44,7 +45,7 @@ class Water:
 
 class Clouds:
     def __init__(self, horizon, level_width, cloud_number):
-        cloud_surface_list = import_folder("Python-Project/graphics/decoration/clouds")
+        cloud_surface_list = import_folder(f"Python-Project/{graphics}/decoration/clouds")
         min_x = -SCREEN_WIDTH
         max_x = level_width + SCREEN_WIDTH
         min_y = 0
