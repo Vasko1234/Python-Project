@@ -12,7 +12,9 @@ class Level:
     def __init__(self, current_level, surface, create_overworld, change_coins, change_health):
         self.display_surface = surface
         self.world_shift = 0
-        #self.current_x = None
+
+        self.coin_sound = pygame.mixer.Sound("Python-Project/audio/effects/coin.wav")
+        self.stomp_sound = pygame.mixer.Sound("Python-Project/audio/effects/stomp.wav")
 
         self.create_overworld = create_overworld
         self.current_level = current_level
@@ -143,11 +145,9 @@ class Level:
                 if player.direction.x < 0:
                     player.collision_rect.left = sprite.rect.right
                     player.on_left = True
-                    #self.current_x = player.rect.left
                 elif player.direction.x > 0:
                     player.collision_rect.right = sprite.rect.left
                     player.on_right = True
-                    #self.current_x = player.rect.right
 
     def vertical_movement_collision(self):
         player = self.player.sprite
@@ -209,6 +209,7 @@ class Level:
     def check_coin_collisions(self):
         collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coins_sprites, True)
         if collided_coins:
+            self.coin_sound.play()
             for coin in collided_coins:
                 self.change_coins(coin.value)
 
@@ -221,6 +222,7 @@ class Level:
                 enemy_top = enemy.rect.top
                 player_bottom = self.player.sprite.rect.bottom
                 if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 0:
+                    self.stomp_sound.play()
                     self.player.sprite.direction.y = -5
                     explosion_sprite = ParticleEffect(enemy.rect.center, "explosion")
                     self.explosion_sprites.add(explosion_sprite)
