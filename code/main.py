@@ -6,7 +6,7 @@ from overworld import Overworld
 
 class Game:
     def __init__(self):
-        self.max_level = 2
+        self.max_level = 0
         self.overworld = Overworld(0, self.max_level, screen, self.create_level)
         self.status = "overworld"
 
@@ -40,7 +40,7 @@ while True:
             sys.exit()
 
     pygame.display.set_caption(f"FPS: {int(clock.get_fps())}")
-    screen.fill((0, 0, 0))
+    screen.fill("grey")
     game.run()
 
     pygame.display.update()
