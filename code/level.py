@@ -12,7 +12,7 @@ class Level:
     def __init__(self, current_level, surface, create_overworld, change_coins, change_health):
         self.display_surface = surface
         self.world_shift = 0
-        self.current_x = None
+        #self.current_x = None
 
         self.create_overworld = create_overworld
         self.current_level = current_level
@@ -135,24 +135,19 @@ class Level:
 
     def horizontal_movement_collision(self):
         player = self.player.sprite
-        player.rect.x += player.direction.x * player.speed
+        player.collision_rect.x += player.direction.x * player.speed
         collidable_sprites = self.terrain_sprites.sprites() + self.crates_sprites.sprites() + self.fg_palms_sprites.sprites()
 
         for sprite in collidable_sprites:
-            if sprite.rect.colliderect(player.rect):
+            if sprite.rect.colliderect(player.collision_rect):
                 if player.direction.x < 0:
-                    player.rect.left = sprite.rect.right
+                    player.collision_rect.left = sprite.rect.right
                     player.on_left = True
-                    self.current_x = player.rect.left
+                    #self.current_x = player.rect.left
                 elif player.direction.x > 0:
-                    player.rect.right = sprite.rect.left
+                    player.collision_rect.right = sprite.rect.left
                     player.on_right = True
-                    self.current_x = player.rect.right
-
-        if player.on_left and (player.rect.left < self.current_x or player.direction.x >= 0):
-            player.on_left = False
-        if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
-            player.on_right = False
+                    #self.current_x = player.rect.right
 
     def vertical_movement_collision(self):
         player = self.player.sprite
@@ -160,20 +155,18 @@ class Level:
         collidable_sprites = self.terrain_sprites.sprites() + self.crates_sprites.sprites() + self.fg_palms_sprites.sprites()
 
         for sprite in collidable_sprites:
-            if sprite.rect.colliderect(player.rect):
+            if sprite.rect.colliderect(player.collision_rect):
                 if player.direction.y > 0:
-                    player.rect.bottom = sprite.rect.top
+                    player.collision_rect.bottom = sprite.rect.top
                     player.direction.y = 0
                     player.on_ground = True
                 elif player.direction.y < 0:
-                    player.rect.top = sprite.rect.bottom
+                    player.collision_rect.top = sprite.rect.bottom
                     player.direction.y = 0
                     player.on_ceiling = True
 
         if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
             player.on_ground = False
-        if player.on_ceiling and player.direction.y > 0:
-            player.on_ceiling = False
 
     def scroll_x(self):
         player = self.player.sprite
@@ -243,6 +236,9 @@ class Level:
         self.bg_palms_sprites.update(self.world_shift)
         self.bg_palms_sprites.draw(self.display_surface)
 
+        self.dust_sprite.update(self.world_shift)
+        self.dust_sprite.draw(self.display_surface)
+
         self.terrain_sprites.update(self.world_shift)
         self.terrain_sprites.draw(self.display_surface)
 
@@ -264,9 +260,6 @@ class Level:
 
         self.fg_palms_sprites.update(self.world_shift)
         self.fg_palms_sprites.draw(self.display_surface)
-
-        self.dust_sprite.update(self.world_shift)
-        self.dust_sprite.draw(self.display_surface)
 
         self.player.update()
         self.horizontal_movement_collision()
