@@ -9,7 +9,7 @@ from particles import ParticleEffect
 from game_data import levels
 
 class Level:
-    def __init__(self, current_level, surface, create_overworld):
+    def __init__(self, current_level, surface, create_overworld, change_coins):
         self.display_surface = surface
         self.world_shift = 0
         self.current_x = None
@@ -23,6 +23,8 @@ class Level:
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
         self.player_setup(player_layout)
+
+        self.change_coins = change_coins
 
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
@@ -80,9 +82,9 @@ class Level:
 
                     if type == "coins":
                         if value == "0":
-                            sprite = Coin(tile_size, x, y, f"Python-Project/graphics/{graphics}/coins/gold")
+                            sprite = Coin(tile_size, x, y, f"Python-Project/graphics/{graphics}/coins/gold", 5)
                         if value == "1":
-                            sprite = Coin(tile_size, x, y, f"Python-Project/graphics/{graphics}/coins/silver")
+                            sprite = Coin(tile_size, x, y, f"Python-Project/graphics/{graphics}/coins/silver", 1)
 
                     if type == "fg_palms":
                         if value == "0":
@@ -209,6 +211,12 @@ class Level:
         if pygame.sprite.spritecollide(self.player.sprite, self.goal, False):
             self.create_overworld(self.current_level, self.new_max_level)
 
+    def check_coin_collisions(self):
+        collided_coins = pygame.sprite.spritecollide(self.player.sprite, self.coins_sprites, True)
+        if collided_coins:
+            for coin in collided_coins:
+                self.change_coins(coin.value)
+
     def run(self):
 
         self.sky.draw(self.display_surface)
@@ -252,5 +260,7 @@ class Level:
 
         self.check_death()
         self.check_win()
+
+        self.check_coin_collisions()
         
         self.water.draw(self.display_surface, self.world_shift)
