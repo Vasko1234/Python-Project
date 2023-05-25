@@ -9,7 +9,7 @@ from particles import ParticleEffect
 from game_data import levels
 
 class Level:
-    def __init__(self, current_level, surface, create_overworld, change_coins):
+    def __init__(self, current_level, surface, create_overworld, change_coins, change_health):
         self.display_surface = surface
         self.world_shift = 0
         self.current_x = None
@@ -22,7 +22,7 @@ class Level:
         player_layout = import_csv_layout(level_data["player"])
         self.player = pygame.sprite.GroupSingle()
         self.goal = pygame.sprite.GroupSingle()
-        self.player_setup(player_layout)
+        self.player_setup(player_layout, change_health)
 
         self.change_coins = change_coins
 
@@ -107,13 +107,13 @@ class Level:
 
         return sprite_group
     
-    def player_setup(self, layout):
+    def player_setup(self, layout, change_health):
         for row_index, row in enumerate(layout):
             for col_index, value in enumerate(row):
                 x = col_index * tile_size
                 y = row_index * tile_size
                 if value == "0":
-                    sprite = Player((x, y), self.display_surface, self.create_jump_particles)
+                    sprite = Player((x, y), self.display_surface, self.create_jump_particles, change_health)
                     self.player.add(sprite)
                 if value == "1":
                     hat_surface = pygame.image.load(f"Python-Project/graphics/{graphics}/character/hat.png").convert_alpha()
@@ -232,6 +232,8 @@ class Level:
                     explosion_sprite = ParticleEffect(enemy.rect.center, "explosion")
                     self.explosion_sprites.add(explosion_sprite)
                     enemy.kill()
+                else:
+                    self.player.sprite.get_damage()
 
     def run(self):
 
