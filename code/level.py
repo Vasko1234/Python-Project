@@ -29,6 +29,8 @@ class Level:
         self.dust_sprite = pygame.sprite.GroupSingle()
         self.player_on_ground = False
 
+        self.explosion_sprites = pygame.sprite.Group()
+
         terrain_layout = import_csv_layout(level_data["terrain"])
         self.terrain_sprites = self.create_tile_group(terrain_layout, "terrain")
 
@@ -217,6 +219,20 @@ class Level:
             for coin in collided_coins:
                 self.change_coins(coin.value)
 
+    def check_enemy_collisions(self):
+        enemy_collisions = pygame.sprite.spritecollide(self.player.sprite, self.enemies_sprites, False)
+
+        if enemy_collisions:
+            for enemy in enemy_collisions:
+                enemy_center = enemy.rect.centery
+                enemy_top = enemy.rect.top
+                player_bottom = self.player.sprite.rect.bottom
+                if enemy_top < player_bottom < enemy_center and self.player.sprite.direction.y >= 0:
+                    self.player.sprite.direction.y = -5
+                    explosion_sprite = ParticleEffect(enemy.rect.center, "explosion")
+                    self.explosion_sprites.add(explosion_sprite)
+                    enemy.kill()
+
     def run(self):
 
         self.sky.draw(self.display_surface)
@@ -232,6 +248,8 @@ class Level:
         self.constraints_sprites.update(self.world_shift)
         self.enemy_collision_reverse()
         self.enemies_sprites.draw(self.display_surface)
+        self.explosion_sprites.update(self.world_shift)
+        self.explosion_sprites.draw(self.display_surface)
 
         self.crates_sprites.update(self.world_shift)
         self.crates_sprites.draw(self.display_surface)
@@ -262,5 +280,6 @@ class Level:
         self.check_win()
 
         self.check_coin_collisions()
+        self.check_enemy_collisions()
         
         self.water.draw(self.display_surface, self.world_shift)
