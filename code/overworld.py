@@ -2,6 +2,7 @@ import pygame
 from game_data import levels
 from support import import_folder
 from decoration import Sky
+from settings import graphics_color
 
 class Node(pygame.sprite.Sprite):
     def __init__(self, position, status, icon_speed, path):
@@ -35,7 +36,7 @@ class Icon(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
         self.position = position
-        self.image = pygame.image.load("Python-Project/graphics/green_graphics/overworld/hat.png").convert_alpha()
+        self.image = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/overworld/hat.png").convert_alpha()
         self.rect = self.image.get_rect(center = position)
 
     def update(self):

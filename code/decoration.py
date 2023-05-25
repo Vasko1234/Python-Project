@@ -1,4 +1,4 @@
-from settings import vertical_tile_number, tile_size, SCREEN_WIDTH, graphics
+from settings import vertical_tile_number, tile_size, SCREEN_WIDTH, graphics_color
 import pygame
 from tiles import AnimatedTile, StaticTile
 from support import import_folder
@@ -6,9 +6,9 @@ from random import choice, randint
 
 class Sky:
     def __init__(self, horizon, style = "level"):
-        self.top = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_top.png").convert_alpha()
-        self.middle = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_middle.png").convert_alpha()
-        self.bottom = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_bottom.png").convert_alpha()
+        self.top = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/decoration/sky/sky_top.png").convert_alpha()
+        self.middle = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/decoration/sky/sky_middle.png").convert_alpha()
+        self.bottom = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/decoration/sky/sky_bottom.png").convert_alpha()
         self.horizon = horizon
 
         self.top = pygame.transform.scale(self.top, (SCREEN_WIDTH, tile_size))
@@ -17,7 +17,7 @@ class Sky:
 
         self.style = style
         if self.style == "overworld":
-            palm_surfaces = import_folder(f"Python-Project/graphics/{graphics}/overworld/palms")
+            palm_surfaces = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/overworld/palms")
             self.palms = []
 
             for surface in [choice(palm_surfaces) for image in range(10)]:
@@ -26,7 +26,7 @@ class Sky:
                 rect = surface.get_rect(midbottom = (x, y))
                 self.palms.append((surface, rect))
 
-            cloud_surfaces = import_folder(f"Python-Project/graphics/{graphics}/overworld/clouds")
+            cloud_surfaces = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/overworld/clouds")
             self.clouds = []
 
             for surface in [choice(cloud_surfaces) for image in range(10)]:
@@ -61,7 +61,7 @@ class Water:
         for tile in range(tile_x_amount):
             x = tile * water_tile_width + water_start
             y = top
-            sprite = AnimatedTile(192, x, y, f"Python-Project/graphics/{graphics}/decoration/water")
+            sprite = AnimatedTile(192, x, y, f"Python-Project/graphics/{graphics_color}_graphics/decoration/water")
             self.water_sprites.add(sprite)
 
     def draw(self, surface, shift):
@@ -70,7 +70,7 @@ class Water:
 
 class Clouds:
     def __init__(self, horizon, level_width, cloud_number):
-        cloud_surface_list = import_folder(f"Python-Project/graphics/{graphics}/decoration/clouds")
+        cloud_surface_list = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/decoration/clouds")
         min_x = -SCREEN_WIDTH
         max_x = level_width + SCREEN_WIDTH
         min_y = 0

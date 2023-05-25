@@ -1,6 +1,6 @@
 import pygame
 from support import import_folder
-from settings import graphics
+from settings import graphics_color
 from math import sin
 
 class Player(pygame.sprite.Sprite):
@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
         self.hurt_time = 0
 
     def import_character_assets(self):
-        character_path = f"Python-Project/graphics/{graphics}/character/"
+        character_path = f"Python-Project/graphics/{graphics_color}_graphics/character/"
         self.animations = {"idle": [], "run": [], "jump": [], "fall": []}
 
         for animation in self.animations.keys():
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
             self.animations[animation] = import_folder(full_path)
 
     def import_dust_run_particles(self):
-        self.dust_run_particles = import_folder(f"Python-Project/graphics/{graphics}/character/dust_particles/run")
+        self.dust_run_particles = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/character/dust_particles/run")
 
     def animate(self):
         animation = self.animations[self.status]

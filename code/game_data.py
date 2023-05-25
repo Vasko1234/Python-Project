@@ -1,3 +1,5 @@
+from settings import graphics_color
+
 level_0 = {
     "terrain": "Python-Project/levels/0/level_0._terrain.csv",
     "coins": "Python-Project/levels/0/level_0._coins.csv",
@@ -10,7 +12,7 @@ level_0 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (110, 400),
     "unlock" : 1,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/0"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/0"
 }
 
 level_1 = {
@@ -25,7 +27,7 @@ level_1 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (300, 220),
     "unlock" : 2,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/1"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/1"
 }
 
 level_2 = {
@@ -40,7 +42,7 @@ level_2 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (480, 610),
     "unlock" : 3,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/2"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/2"
 }
 
 level_3 = {
@@ -55,7 +57,7 @@ level_3 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (610, 350),
     "unlock" : 4,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/3"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/3"
 }
 
 level_4 = {
@@ -70,7 +72,7 @@ level_4 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (880, 210),
     "unlock" : 5,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/4"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/4"
 }
 
 level_5 = {
@@ -85,7 +87,7 @@ level_5 = {
     "grass": "Python-Project/levels/0/level_0._grass.csv",
     "node_position": (1050, 400),
     "unlock" : 5,
-    "node_graphics": "Python-Project/graphics/green_graphics/overworld/5"
+    "node_graphics": f"Python-Project/graphics/{graphics_color}_graphics/overworld/5"
 }
 
 levels = {

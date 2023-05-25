@@ -1,17 +1,18 @@
 import pygame
+from settings import graphics_color
 
 class UI:
     def __init__(self, surface):
         self.display_surface = surface
 
-        self.health_bar = pygame.image.load("Python-Project/graphics/green_graphics/ui/health_bar.png").convert_alpha()
+        self.health_bar = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/ui/health_bar.png").convert_alpha()
         self.health_bar_topleft = (54, 39)
         self.bar_max_width = 152
         self.bar_height = 4
 
-        self.coin = pygame.image.load("Python-Project/graphics/green_graphics/ui/coin.png").convert_alpha()
+        self.coin = pygame.image.load(f"Python-Project/graphics/{graphics_color}_graphics/ui/coin.png").convert_alpha()
         self.coin_rect = self.coin.get_rect(topleft = (50, 61))
-        self.font = pygame.font.Font("Python-Project/graphics/green_graphics/ui/ARCADEPI.ttf", 30)
+        self.font = pygame.font.Font(f"Python-Project/graphics/{graphics_color}_graphics/ui/ARCADEPI.ttf", 30)
 
     def show_health(self, current, full):
         self.display_surface.blit(self.health_bar, (20, 10))

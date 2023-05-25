@@ -1,6 +1,6 @@
 import pygame
 from support import import_folder
-from settings import graphics
+from settings import graphics_color
 
 class ParticleEffect(pygame.sprite.Sprite):
     def __init__(self, position, type):
@@ -8,11 +8,11 @@ class ParticleEffect(pygame.sprite.Sprite):
         self.frame_index = 0
         self.animation_speed = 0.15
         if type == "jump":
-            self.frames = import_folder(f"Python-Project/graphics/{graphics}/character/dust_particles/jump")
+            self.frames = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/character/dust_particles/jump")
         if type == "land":
-            self.frames = import_folder(f"Python-Project/graphics/{graphics}/character/dust_particles/land")
+            self.frames = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/character/dust_particles/land")
         if type == "explosion":
-            self.frames = import_folder(f"Python-Project/graphics/{graphics}/enemy/explosion")
+            self.frames = import_folder(f"Python-Project/graphics/{graphics_color}_graphics/enemy/explosion")
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect(center = position)
     

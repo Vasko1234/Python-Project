@@ -1,10 +1,10 @@
 import pygame
 from tiles import AnimatedTile
-from settings import graphics
+from settings import graphics_color
 
 class Enemy(AnimatedTile):
     def __init__(self, size, x, y):
-        super().__init__(size, x, y, f"Python-Project/graphics/{graphics}/enemy/run")
+        super().__init__(size, x, y, f"Python-Project/graphics/{graphics_color}_graphics/enemy/run")
         self.rect.y += size - self.image.get_size()[1]
         self.speed = 1
 
