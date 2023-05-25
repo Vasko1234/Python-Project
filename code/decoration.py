@@ -6,9 +6,9 @@ from random import choice, randint
 
 class Sky:
     def __init__(self, horizon, style = "level"):
-        self.top = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_top.png").convert()
-        self.middle = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_middle.png").convert()
-        self.bottom = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_bottom.png").convert()
+        self.top = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_top.png").convert_alpha()
+        self.middle = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_middle.png").convert_alpha()
+        self.bottom = pygame.image.load(f"Python-Project/graphics/{graphics}/decoration/sky/sky_bottom.png").convert_alpha()
         self.horizon = horizon
 
         self.top = pygame.transform.scale(self.top, (SCREEN_WIDTH, tile_size))
@@ -17,7 +17,7 @@ class Sky:
 
         self.style = style
         if self.style == "overworld":
-            palm_surfaces = import_folder("Python-Project/graphics/green_graphics/overworld/palms")
+            palm_surfaces = import_folder(f"Python-Project/graphics/{graphics}/overworld/palms")
             self.palms = []
 
             for surface in [choice(palm_surfaces) for image in range(10)]:
@@ -26,7 +26,7 @@ class Sky:
                 rect = surface.get_rect(midbottom = (x, y))
                 self.palms.append((surface, rect))
 
-            cloud_surfaces = import_folder("Python-Project/graphics/green_graphics/overworld/clouds")
+            cloud_surfaces = import_folder(f"Python-Project/graphics/{graphics}/overworld/clouds")
             self.clouds = []
 
             for surface in [choice(cloud_surfaces) for image in range(10)]:
