@@ -5,6 +5,8 @@ from level import Level
 from overworld import Overworld
 from ui import UI
 
+pygame.init()
+
 class Game:
     def __init__(self):
         self.max_level = 0
@@ -59,8 +61,6 @@ class Game:
             self.ui.show_health(self.current_health, self.max_health)
             self.ui.show_coins(self.coins)
             self.check_game_over()
-
-pygame.init()
 
 FPS = 240
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
