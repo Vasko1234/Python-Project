@@ -91,9 +91,9 @@ class Level:
                             sprite = Coin(tile_size, x, y, f"Python-Project/graphics/{graphics_color}_graphics/coins/silver", 1)
 
                     if type == "fg_palms":
-                        if value == "0":
+                        if value == "3":
                             sprite = Palm(tile_size, x, y, f"Python-Project/graphics/{graphics_color}_graphics/terrain/palm_small", 38)
-                        if value == "1":
+                        if value == "4":
                             sprite = Palm(tile_size, x, y, f"Python-Project/graphics/{graphics_color}_graphics/terrain/palm_large", 64)
 
                     if type == "bg_palms":
