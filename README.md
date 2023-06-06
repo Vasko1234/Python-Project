@@ -29,8 +29,8 @@ and the next level will be unlocked for play.
 
 # Known Issues
 
-The game is optimized to run at 240 frames per second (fps). However, if the game is run
-on a computer that cannot maintain at least 200 fps, the game may feel slower and laggy.
+The game is optimized to run at 240 frames per second (FPS). However, if the game is run
+on a computer that cannot maintain at least 200 FPS, the game will feel slower and laggy.
 Please ensure your computer meets the minimum requirements for a smooth gameplay experience.
 
 # Author
